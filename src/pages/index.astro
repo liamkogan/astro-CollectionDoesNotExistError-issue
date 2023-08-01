@@ -1,0 +1,29 @@
+---
+import { getCollection, getEntry } from "astro:content";
+
+// Get all entries from a collection.
+// Requires the name of the collection as an argument.
+// Example: retrieve `src/content/blog/**`
+const allBlogPosts = await getCollection("hello-world");
+
+// Get a single entry from a collection.
+// Requires the name of the collection and either
+// the entry `slug` (content collections) or `id` (data collections)
+// Example: retrieve `src/content/authors/grace-hopper.json`
+const entry = await getEntry("hello-world", "hello");
+
+const { Content, headings } = await entry.render();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <Content />
+  </body>
+</html>
